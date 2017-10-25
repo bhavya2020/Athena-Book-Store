@@ -68,16 +68,45 @@ exports.showBooks=function select(cb) {
 
 
 
-// exports.deleteBook=function deleteBook(isbn,cb) {
-//     const conn = mysql.createConnection(dbconfig);
-//     conn.query(
-//         `delete from book where ISBN=?;`,
-//         [isbn],
-//         (err) =>{
-//             if(err) throw err;
-//             cb();
-//         }
-//     )
-// };
+exports.deleteBook=function deleteBook(isbn,cb) {
+    const conn = mysql.createConnection(dbconfig);
+    conn.query(
+        `delete from written_by where ISBN=?;`,
+        [isbn],
+        (err) =>{
+            if(err) throw err;
+            conn.query(
+                `delete from published_in where country in (select country from isbncode where ISBN= ?);`,
+                [isbn],
+                (err)=>{
+                    if (err) throw err;
+                    conn.query(
+                        `delete from isbncode where ISBN=?;`,
+                        [isbn],
+                        (err)=>{
+                            if (err)throw  err;
+                            conn.query(
+                                `delete from popularity where quantity in ( select quantity from book where ISBN=?); `,
+                                [isbn],
+                                (err)=>{
+                                    if(err) throw err;
+                                    conn.query(
+                                        `delete from book where ISBN=?;`,
+                                        [isbn],
+                                        (err)=>{
+                                            if(err) throw err;
+                                            cb();
+
+                                        }
+                                    )
+                                }
+                            )
+                        }
+                    )
+                }
+            )
+        }
+    )
+};
 
 

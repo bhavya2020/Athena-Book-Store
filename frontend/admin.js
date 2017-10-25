@@ -14,7 +14,7 @@ function refresh(books)
                 <b>Price: </b> ${book.price}
                 <br>
                 <b>stock: </b> ${book.quantity}
-                 <i data-pid="${book.ISBN}" class="fa fa-trash del" onclick="del(this)" style="color: red; float: right;font-size: 4vh"></i>
+                 <i data-isbn="${book.ISBN}" class="fa fa-trash del" onclick="del(this)" style="color: red; float: right;font-size: 4vh"></i>
                  </p>
             </div>
         </div>`
@@ -24,6 +24,7 @@ function refresh(books)
 }
 $(()=>{
     $.get('http://localhost:4646/admin',(data)=> {
+        console.log(data);
         refresh(data);
     });
     let isbn=$('#isbn');
@@ -70,13 +71,13 @@ $(()=>{
             noOfBooks.val('');
     });
 
-    // window.del= function(el)
-    // {
-    //     let pid=$(el).attr('data-pid');
-    //     $.post(`/admin/${pid}`,(data) => {
-    //         refresh(data)
-    //     })
-    // }
+    window.del= function(el)
+    {
+        let isbn=$(el).attr('data-isbn');
+        $.post(`/admin/${isbn}`,(data) => {
+            refresh(data)
+        })
+    }
 
 });
 
