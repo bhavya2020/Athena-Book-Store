@@ -8,17 +8,53 @@ const dbconfig={
     password:config.DB.password
 };
 
-// exports.addBook= function insertBook(task,cb) {
-//     const conn = mysql.createConnection(dbconfig);
-//   conn.query(
-//       `insert into book(od,task,done) values (1,?,false);`,
-//        [task],
-//        (err) => {
-//        if (err) throw err;
-//        cb();
-//        }
-//       )
-// };
+exports.addBook= function insertBook(obj,cb) {
+    const conn = mysql.createConnection(dbconfig);
+  conn.query(
+       `insert into book values(?,?,?,?,?,?)`,
+       [obj.isbn,obj.genre,obj.title,obj.price,obj.date,obj.quantity],
+       (err) => {
+       if (err) throw err;
+         conn.query(
+             `insert into isbncode values (?,?)`,
+             [obj.country,obj.isbn],
+             (err)=>{
+                 if(err) throw err;
+                 conn.query(
+                     `insert into publisher values (?,?,?)`,
+                     [obj.pub_name,obj.pub_address,obj.pub_phone],
+                     (err)=>{
+                         if(err) throw err;
+                         conn.query(
+                             `insert into published_in values (?,?)`,
+                             [obj.pub_name,obj.country],
+                             (err)=>{
+                                 if(err) throw err;
+                                 conn.query(
+                                     `insert into author values (?,?,?)`,
+                                     [obj.auth_name,obj.auth_address,obj.noOfBooks],
+                                     (err)=>{
+                                         if(err) throw err;
+                                         conn.query(
+                                             `insert into written_by values (?,?,?)`,
+                                             [obj.isbn,obj.auth_name,obj.auth_address],
+                                             (err)=>{
+                                                 if(err) throw err;
+                                                 cb();
+                                             }
+
+                                         )
+                                     }
+                                 )
+                             }
+                        )
+                     }
+                 )
+             }
+         )
+       }
+      )
+};
 exports.showBooks=function select(cb) {
     const conn = mysql.createConnection(dbconfig);
      conn.query(
@@ -32,16 +68,16 @@ exports.showBooks=function select(cb) {
 
 
 
-exports.deleteBook=function deleteBook(isbn,cb) {
-    const conn = mysql.createConnection(dbconfig);
-    conn.query(
-        `delete from book where ISBN=?;`,
-        [isbn],
-        (err) =>{
-            if(err) throw err;
-            cb();
-        }
-    )
-};
+// exports.deleteBook=function deleteBook(isbn,cb) {
+//     const conn = mysql.createConnection(dbconfig);
+//     conn.query(
+//         `delete from book where ISBN=?;`,
+//         [isbn],
+//         (err) =>{
+//             if(err) throw err;
+//             cb();
+//         }
+//     )
+// };
 
 

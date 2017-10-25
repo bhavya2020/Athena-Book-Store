@@ -8,14 +8,12 @@ route.get('/', (req, res) => {
 });
 
 
-// route.post('/', (req, res) => {
-//     products.create({
-//         name: req.body.name,
-//         price:req.body.price
-//     })
-//         .then((result) => res.redirect('http://localhost:5656/admin'))
-//         .catch((err) => console.error(err))
-// });
+route.post('/', (req, res) => {
+    book.addBook(req.body,()=>{
+        res.redirect('http://localhost:4646/admin');
+    })
+});
+
 // route.post('/:id', (req, res) => {
 //     if (isNaN(parseInt(req.params.id))) {
 //         return res.status(404).send({

@@ -26,16 +26,49 @@ $(()=>{
     $.get('http://localhost:4646/admin',(data)=> {
         refresh(data);
     });
-    // let name=$('#name');
-    // let price=$('#price');
-    // $('#add').click(()=>{
-    //     $.post('http://localhost:5656/admin',{
-    //         name: name.val(),
-    //         price: price.val()
-    //     },(data)=>{refresh(data)});
-    //     name.val('');
-    //     price.val('');
-    // });
+    let isbn=$('#isbn');
+    let title=$('#title');
+    let genre=$('#genre');
+    let price=$('#price');
+    let quantity=$('#quantity');
+    let pub_name=$('#pub_name');
+    let pub_address=$('#pub_address');
+    let pub_phone=$('#pub_phone');
+    let country=$('#country');
+    let date=$('#date');
+    let auth_name=$('#auth_name');
+    let auth_address=$('#auth_address');
+    let noOfBooks=$('#noBooks');
+    $('#add').click(()=>{
+        $.post('http://localhost:4646/admin',{
+            isbn:isbn.val(),
+            title:title.val(),
+            genre:genre.val(),
+            price:price.val(),
+            quantity:quantity.val(),
+            pub_name:pub_name.val(),
+            pub_address:pub_address.val(),
+            pub_phone:pub_phone.val(),
+            country:country.val(),
+            date:date.val(),
+            auth_name: auth_name.val(),
+            auth_address:auth_address.val(),
+            noOfBooks:noOfBooks.val()
+        },(data)=>{refresh(data)});
+            isbn.val('');
+            title.val('');
+            genre.val('');
+            price.val('');
+            quantity.val('');
+            pub_name.val('');
+            pub_address.val('');
+            pub_phone.val('');
+            country.val('');
+            date.val('');
+            auth_name.val('');
+            auth_address.val('');
+            noOfBooks.val('');
+    });
 
     // window.del= function(el)
     // {
