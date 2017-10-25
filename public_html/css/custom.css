@@ -1,0 +1,123 @@
+/*.container-fluid,body,html{*/
+/*height: 100%;*/
+/*}*/
+a{
+    color: white;
+}
+.bg {
+    background-color: khaki;
+    background-image: url(../images/bg2.jpg);
+    background-size: cover;
+    position: absolute;
+    top:0px;
+    left: 0px;
+    max-width: 100%;
+    background-repeat: no-repeat;
+}
+.findsitter{
+    background-color: #f0f0f0;
+}
+
+.bgfindsitter {
+    background-image: url("../images/stockfresh_712587_dog-paw-and-hand-shaking_sizeM.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.navbar {
+    background-color: transparent;
+    background: transparent;
+    border-color: transparent;
+}
+
+.font {
+    font-family: "mry_KacstQurn";
+}
+
+
+input[type="text email"] {
+    background: transparent;
+    border: none;
+}
+
+.clear-sml {
+    clear: both;
+    margin-top: 18px;
+    margin-bottom: 18px;
+}
+
+.clear-sml3 {
+    clear: both;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.twnty_four {
+    font-size: 24px;
+}
+
+.twnty {
+    font-size: 20px;
+}
+
+.white {
+    color: #ebcccc;
+}
+
+.orange {
+    color: #d9534f;
+}
+
+.black {
+    color: #1d1e1f;
+}
+
+.dark_orange {
+    color: #843534
+}
+
+.box_left {
+    margin-left: 750px;
+}
+
+.box_right {
+    margin-top: 270px;
+    margin-right: 750px;
+}
+
+.clr-sml {
+    height: 10px;
+}
+.ali{
+    margin-top: 40px;
+    border: 1px;
+    border-radius: 10px;
+    box-shadow:1px 1px 5px #1d1e1f;
+}
+.shadow{
+    box-shadow: 1px 0px  5px #1d1e1f;
+}
+.bor{
+    border: 1px solid white;
+}
+
+.cart{
+    width: 250px;
+    box-shadow: 1px 1px 5px #1d1e1f;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+.mleft{
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+.mgleftsort{margin-left: 50px;}
+.mgtopdown{
+    margin-top: 100px;
+}
