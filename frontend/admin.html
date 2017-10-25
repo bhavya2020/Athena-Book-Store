@@ -23,23 +23,77 @@
     <div class="row">
         <div class="col-12">
             <h1 style="color:darkslateblue;text-align:center;font-size:10vh ; font-style: oblique; font-family: Dialog;font-weight: bold"> ADMIN PAGE</h1>
-            <br>
-            <h4 style="font-family: Dialog; color: navy">Add a new book</h4>
-            <br>
+        </div>
+    </div></div>
+<br>
+<div class="row justify-content-center">
+<h2> Book Details: </h2>
+</div>
+<br>
+    <div class="row justify-content-center">
+
+        <div class="col-4 m-1">
+            <input id="isbn" class="form-control" placeholder="isbn" type="number">
+        </div>
+        <div class="col-4 m-1">
+            <input id="title" class="form-control" placeholder="title">
+        </div>
+        <div class="col-4 m-1">
+            <input id="genre" class="form-control" placeholder="genre">
+        </div>
+        <div class="col-4 m-1">
+            <input id="price" class="form-control" placeholder="price" type="number">
+        </div>
+        <div class="col-4 m-1">
+            <input id="quantity" class="form-control" placeholder="quantity" type="number">
         </div>
     </div>
-    <!--<div class="row justify-content-center">-->
-        <!--<div class="col-3">-->
-            <!--<input id="name" class="form-control" placeholder="name">-->
-        <!--</div>-->
-        <!--<div class="col-3">-->
-            <!--<input id="price" class="form-control" placeholder="price" type="number">-->
-        <!--</div>-->
-        <!--<div class="col-1">-->
-            <!--<button class="btn btn-primary" id="add"><i class="fa fa-plus"></i> </button>-->
-        <!--</div>-->
-    <!--</div>-->
-    <div class="row justify-content-center mt-3" id="books">
+<br>
+<div class="row justify-content-center">
+<h2> Publisher Details:</h2>
+</div>
+<br>
+    <div class="row justify-content-center">
+        <div class="col-4 m-1">
+            <input id="pub_name" class="form-control" placeholder="publisher name">
+        </div>
+        <div class="col-4 m-1">
+            <input id="pub_address" class="form-control" placeholder="address">
+        </div>
+        <div class="col-4 m-1">
+            <input id="pub_phone" class="form-control" placeholder="phone number">
+        </div>
+        <div class="col-4 m-1">
+            <input id="country" class="form-control" placeholder="country">
+        </div>
+        <div class="col-4 m-1">
+            <input id="date" class="form-control" placeholder="publishing date" type="date">
+        </div>
+    </div>
+<br>
+<div class="row justify-content-center">
+<h2> Author Details:</h2>
+</div>
+<br>
+<div class="row justify-content-center">
+    <div class="col-4 m-1">
+        <input id="auth_name" class="form-control" placeholder="author name">
+    </div>
+    <div class="col-4 m-1">
+        <input id="auth_address" class="form-control" placeholder="address">
+    </div>
+    <div class="col-4 m-1">
+        <input id="noBooks" class="form-control" placeholder="no of books">
+    </div>
+</div>
+<br>
+<div class="row justify-content-center mt-3">
+<div class="col-3">
+    <button class="btn btn-primary" id="add">ADD A NEW BOOK<i class="fa fa-plus"></i> </button>
+</div>
+</div>
+ <br>
+<div class="row justify-content-center mt-3" id="books">
         <div class="card col-3" style="width: 20rem;">
             <div class="card-body">
                 <h4 class="card-title">Card title</h4>
