@@ -56,6 +56,33 @@ exports.addBook= function insertBook(obj,cb) {
       )
 };
 
+exports.buybook=function buybook(obj,cb) {
+    const conn = mysql.createConnection(dbconfig);
+    conn.query(
+        `insert into customer values(?,?,?)`,
+        [obj.email, obj.name, obj.address],
+        (err) => {
+            if (err) throw err;
+            conn.query(
+                `insert into customer_phonenum values(?,?)`,
+                [obj.email, obj.phone],
+                (err) => {
+                    console.log("inphone");
+                    if (err) throw err;
+                    conn.query(
+                        `insert into book_purchased values(?,?,?)`,
+                        [obj.isbn, obj.email, obj.date],
+                        (err) => {
+                            console.log("purchase");
+                            if (err) throw err;
+                            cb();
+                        }
+                    )
+                }
+            )
+        }
+    )
+}
 exports.showBooks=function select(cb) {
     const conn = mysql.createConnection(dbconfig);
      conn.query(

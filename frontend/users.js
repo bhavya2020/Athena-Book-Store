@@ -6,19 +6,43 @@ function refresh(products)
     for (let product of products) {
         let newProduct = $(`
              <div class="card col-3 m-2" style="width: 20rem;">
-            <div class="card-body">
-                <h4 class="card-title mt-2">${product.title}</h4>
-                <p class="card-text">A book of genre ${product.genre} written by <b>${product.author_name}</b> published by ${product.publisher_name} on ${product.year.substr(0,10)} in ${product.country} having popularity rate of <b>${product.popularity_rate}</b>.
-                </p>
-                <p class="card-text">
-                <b>Price: </b> ${product.price}
-                <br>
-                <b>stock: </b> ${product.quantity}
-                <br><div style="float: right">Add to cart
-                 <i data-isbn="${product.ISBN}" class="fa fa-plus-circle add" onclick="del(this)" style="color: navy; float: right;font-size: 4vh"></i>
-                 </div></p>
-            </div>
-        </div>`
+                <div class="card-body">
+                    <h4 class="card-title mt-2">${product.title}</h4>
+                    <p class="card-text">A book of genre ${product.genre} written by <b>${product.author_name}</b> published by <b>${product.publisher_name}</b> on ${product.year.substr(0,10)} in ${product.country} having popularity rate of <b>${product.popularity_rate}</b>.
+                    </p>
+                    <p class="card-text">
+                    <b>Price: </b> ${product.price}
+                    <br>
+                    <b>stock: </b> ${product.quantity}
+                    <br><div style="float: right">Add to cart
+                     <i class="fa fa-plus-circle add" data-toggle="modal" data-target="#myModal"  style="color: navy; float: right;font-size: 4vh"></i>
+                     </div></p>
+                </div>
+
+              <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Customer Details</h4>
+                    </div>
+                    <div class="modal-body">
+                      <input type="text" placeholder="Name" id="namecust">
+                      <input type="text" placeholder="Email" id="emailcust">
+                      <input type="number" placeholder="Phonenum" id="phonecust">
+                      <input type="text" placeholder="Address" id="addresscust">
+                      
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default"  id="submitcust" data-isbn="${product.ISBN}" onclick="add(this)">Submit</button>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>`
         );
         productList.append(newProduct);
     }
@@ -62,7 +86,42 @@ $(function(){
                 refresh(data)
             })
         }));
+    window.add=function (el) {
+        let isb=$(el).attr('data-isbn');
+        var name=$('#namecust');
+        //date of purchase
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
 
+        if(dd<10) {
+            dd = '0'+dd
+        }
+
+        if(mm<10) {
+            mm = '0'+mm
+        }
+
+        today = yyyy+''+mm+''+dd;
+
+        var email=$('#emailcust');
+        var phone=$('#phonecust');
+        var address=$('#addresscust');
+        var submitcust=$('#submitcust');
+            $.post('http://localhost:4646/users/buybooks',{
+                isbn:isb,
+                name:name.val(),
+                email:email.val(),
+                phone:phone.val(),
+                address:address.val(),
+                date:today
+            },(data)=>{refresh(data)})
+            
+
+        
+
+    }
     /*window.add= function(el)
     {
         let pid=$(el).attr('data-pid');
