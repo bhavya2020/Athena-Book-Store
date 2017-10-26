@@ -5,7 +5,7 @@ const dbconfig={
     host:'localhost',
     database:'bookstore',
     user:'root',
-    password:'aastha08'
+    password:'bhavya'
 };
 
 exports.addBook= function insertBook(obj,cb) {
@@ -73,7 +73,18 @@ exports.buybook=function buybook(obj,cb) {
                         [obj.isbn, obj.email, obj.date],
                         (err) => {
                             if (err) throw err;
-                            cb();
+                            conn.query(
+                                ` update popularity set  quantity=quantity-1 where quantity in (select quantity from book where ISBN=?);`,[obj.isbn],
+                                (err)=>{
+                                    if(err) throw err;
+                                    conn.query(
+                                        `update book set quantity=quantity-1 where ISBN=?`,[obj.isbn],
+                                        (err)=> {
+                                            if (err) throw err;
+                                            cb()
+                                        })
+                                }
+                            )
                         }
                     )
                 }
@@ -84,7 +95,7 @@ exports.buybook=function buybook(obj,cb) {
 exports.showBooks=function select(cb) {
     const conn = mysql.createConnection(dbconfig);
      conn.query(
-          `select * from ( select * from book  natural join popularity ) b natural join ( select ISBN, author_name from written_by) a natural join (select *  from published_in  natural join isbncode) p`,
+          `select * from ( select book.*,popularity_rate from book join popularity on book.ISBN = popularity.ISBN ) b natural join ( select ISBN, author_name from written_by) a natural join (select *  from published_in  natural join isbncode) p;`,
             (err,rows) =>{
               if(err) throw err;
                cb(rows);
@@ -94,7 +105,7 @@ exports.showBooks=function select(cb) {
 exports.filterbyprice=function select(cb) {
     const conn=mysql.createConnection(dbconfig);
     conn.query(
-        `select * from (select * from book natural join popularity) b natural join (select ISBN, author_name from written_by) a natural join (select *  from published_in  natural join isbncode) p order by price;`,
+        `select * from (select book.*,popularity_rate from book join popularity on book.ISBN = popularity.ISBN ) b natural join (select ISBN, author_name from written_by) a natural join (select *  from published_in  natural join isbncode) p order by price;`,
         (err,rows)=>{
             if(err) throw err;
             cb(rows);
@@ -104,7 +115,7 @@ exports.filterbyprice=function select(cb) {
 exports.filterbypopularity=function select(cb) {
     const conn=mysql.createConnection(dbconfig);
     conn.query(
-        `select * from (select * from book natural join popularity) b natural join (select ISBN, author_name from written_by) a natural join (select *  from published_in  natural join isbncode) p order by popularity_rate desc;`,
+        `select * from (select book.*,popularity_rate from book join popularity on book.ISBN = popularity.ISBN ) b natural join (select ISBN, author_name from written_by) a natural join (select *  from published_in  natural join isbncode) p order by popularity_rate desc;`,
         (err,rows)=>{
             if(err) throw err;
             cb(rows);
@@ -114,7 +125,7 @@ exports.filterbypopularity=function select(cb) {
 exports.filterbystock=function select(cb) {
     const conn=mysql.createConnection(dbconfig);
     conn.query(
-        `select * from (select * from book natural join popularity) b natural join (select ISBN, author_name from written_by) a natural join (select *  from published_in  natural join isbncode) p order by quantity desc;`,
+        `select * from (select book.*,popularity_rate from book join popularity on book.ISBN = popularity.ISBN ) b natural join (select ISBN, author_name from written_by) a natural join (select *  from published_in  natural join isbncode) p order by quantity desc;`,
         (err,rows)=>{
             if(err) throw err;
             cb(rows);
@@ -125,7 +136,7 @@ exports.filterbystock=function select(cb) {
 exports.showBook=function select(cb) {
     const conn = mysql.createConnection(dbconfig);
     conn.query(
-        `select * from ( select * from book  natural join popularity ) b natural join ( select ISBN, author_name from written_by) a natural join (select *  from published_in  natural join isbncode) p ;`,
+        `select * from ( select book.*,popularity_rate from book join popularity on book.ISBN = popularity.ISBN  ) b natural join ( select ISBN, author_name from written_by) a natural join (select *  from published_in  natural join isbncode) p ;`,
         (err,rows) =>{
             if(err) throw err;
             cb(rows);
@@ -136,7 +147,7 @@ exports.showBook=function select(cb) {
 exports.findauthor=function findauthor(name,cb) {
     const conn = mysql.createConnection(dbconfig);
     conn.query(
-        `select * from ( select * from book  natural join popularity ) b natural join ( select ISBN, author_name from written_by) a natural join (select *  from published_in  natural join isbncode) p where author_name=?;`,[name],
+        `select * from ( select book.*,popularity_rate from book join popularity on book.ISBN = popularity.ISBN ) b natural join ( select ISBN, author_name from written_by) a natural join (select *  from published_in  natural join isbncode) p where author_name=?;`,[name],
         (err,rows)=>{
             if (err) throw err;
             cb(rows);
@@ -146,7 +157,7 @@ exports.findauthor=function findauthor(name,cb) {
 exports.findpublisher=function findauthor(name,cb) {
     const conn = mysql.createConnection(dbconfig);
     conn.query(
-        `select * from ( select * from book  natural join popularity ) b natural join ( select ISBN, author_name from written_by) a natural join (select *  from published_in  natural join isbncode) p where publisher_name=?;`,[name],
+        `select * from ( select book.*,popularity_rate from book join popularity on book.ISBN = popularity.ISBN  ) b natural join ( select ISBN, author_name from written_by) a natural join (select *  from published_in  natural join isbncode) p where publisher_name=?;`,[name],
         (err,rows)=>{
             if (err) throw err;
             cb(rows);
@@ -156,7 +167,7 @@ exports.findpublisher=function findauthor(name,cb) {
 exports.findgenre=function findauthor(name,cb) {
     const conn = mysql.createConnection(dbconfig);
     conn.query(
-        `select * from ( select * from book  natural join popularity ) b natural join ( select ISBN, author_name from written_by) a natural join (select *  from published_in  natural join isbncode) p where genre=?;`,[name],
+        `select * from ( select book.*,popularity_rate from book join popularity on book.ISBN = popularity.ISBN  ) b natural join ( select ISBN, author_name from written_by) a natural join (select *  from published_in  natural join isbncode) p where genre=?;`,[name],
         (err,rows)=>{
             if (err) throw err;
             cb(rows);
@@ -166,20 +177,30 @@ exports.findgenre=function findauthor(name,cb) {
 exports.plusBook=function plusBook(isbn,cb) {
     const conn = mysql.createConnection(dbconfig);
     conn.query(
-    `update book set quantity=quantity+1 where ISBN=?`,[isbn],
+       ` update popularity set  quantity=quantity+1 where quantity in (select quantity from book where ISBN=?);`,[isbn],
         (err)=>{
         if(err) throw err;
-        cb();
+         conn.query(
+             `update book set quantity=quantity+1 where ISBN=?`,[isbn],
+               (err)=> {
+                   if (err) throw err;
+                   cb()
+               })
         }
         )
 }
 exports.minusBook=function plusBook(isbn,cb) {
     const conn = mysql.createConnection(dbconfig);
     conn.query(
-        `update book set quantity=quantity-1 where ISBN=?`,[isbn],
+        ` update popularity set  quantity=quantity-1 where quantity in (select quantity from book where ISBN=?);`,[isbn],
         (err)=>{
             if(err) throw err;
-            cb();
+            conn.query(
+                `update book set quantity=quantity-1 where ISBN=?`,[isbn],
+                (err)=> {
+                    if (err) throw err;
+                    cb()
+                })
         }
     )
 }
