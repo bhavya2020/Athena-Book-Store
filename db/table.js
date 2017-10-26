@@ -107,7 +107,36 @@ exports.showBook=function select(cb) {
     )
 };
 
-
+exports.findauthor=function findauthor(name,cb) {
+    const conn = mysql.createConnection(dbconfig);
+    conn.query(
+        `select * from ( select * from book  natural join popularity ) b natural join ( select ISBN, author_name from written_by) a natural join (select *  from published_in  natural join isbncode) p where author_name=?;`,[name],
+        (err,rows)=>{
+            if (err) throw err;
+            cb(rows);
+        }
+    )
+};
+exports.findpublisher=function findauthor(name,cb) {
+    const conn = mysql.createConnection(dbconfig);
+    conn.query(
+        `select * from ( select * from book  natural join popularity ) b natural join ( select ISBN, author_name from written_by) a natural join (select *  from published_in  natural join isbncode) p where publisher_name=?;`,[name],
+        (err,rows)=>{
+            if (err) throw err;
+            cb(rows);
+        }
+    )
+};
+exports.findgenre=function findauthor(name,cb) {
+    const conn = mysql.createConnection(dbconfig);
+    conn.query(
+        `select * from ( select * from book  natural join popularity ) b natural join ( select ISBN, author_name from written_by) a natural join (select *  from published_in  natural join isbncode) p where genre=?;`,[name],
+        (err,rows)=>{
+            if (err) throw err;
+            cb(rows);
+        }
+    )
+}
 
 exports.deleteBook=function deleteBook(isbn,cb) {
     const conn = mysql.createConnection(dbconfig);

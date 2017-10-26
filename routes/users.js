@@ -21,15 +21,31 @@ route.get('/stock', (req, res) => {
         res.send(books);
     })
 });
+route.post('/author/:id',(req,res)=>{
+    products.findauthor(req.params.id,(books)=>{
+        res.send(books);
+    })
+})
+route.post('/publisher/:id',(req,res)=>{
+    products.findpublisher(req.params.id,(books)=>{
+        res.send(books);
+    })
+})
+route.post('/genre/:id',(req,res)=>{
+    products.findgenre(req.params.id,(books)=>{
+        res.send(books);
+    })
+})
 
-// route.post('/:id', (req, res) => {
-//     if (isNaN(parseInt(req.params.id))) {
-//         return res.status(404).send({
-//             message: "Product not found"
-//         })
-//     }
-//     products.findOne({where:{id:req.params.id}})
-//         .then((product) => res.send(product))
-//         .catch(err => console.error(err))
-// });
+/*route.post('/:id', (req, res) => {
+    console.log(products);
+    if (isNaN(parseInt(req.params.id))) {
+        return res.status(404).send({
+            message: "Product not found"
+        })
+    }
+    products.findOne({where:{id:req.params.id}})
+        .then((product) => res.send(product))
+        .catch(err => console.error(err))
+});*/
 exports.route = route;

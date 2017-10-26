@@ -1,3 +1,4 @@
+var author,authorbutton,price,popularity,stock,publisher,publisherbutton,genre,genrebutton;
 function refresh(products)
 {
     let productList=$('#products-list');
@@ -22,18 +23,29 @@ function refresh(products)
         productList.append(newProduct);
     }
 }
-$(()=>{
+$(function(){
+
+
+    price=$('#price');
+    popularity=$('#popularity');
+    stock=$('#stock');
+
     $.get('http://localhost:4646/users',(data)=> {
         console.log(data);
         refresh(data);
-    })
-
-    var price=$('#price');
-    var popularity=$('#popularity');
-    var stock=$('#stock');
+    });
+    author=$('#author');
+    authorbutton=$('#authorbutton');
+    authorbutton.click(authorfind);
+    publisher=$('#publisher');
+    publisherbutton=$('#publisherbutton');
+    publisherbutton.click(publisherfind);
+    genre=$('#genre');
+    genrebutton=$('#genrebutton');
+    genrebutton.click(genrefind);
     (price.click(function () {
             $.get('http://localhost:4646/users/price',(data)=> {
-                console.log("price", data),
+                console.log("price", data);
                     refresh(data)
             })
 
@@ -74,3 +86,48 @@ $(()=>{
         window.location='/cart.html';
     })*/
 });
+function authorfind() {
+    let valauthor=author.val();
+
+    $.post(`/users/author/${valauthor}`,(data)=>{
+        console.log(typeof data)
+        if (!data){
+            console.log("bye")
+            let productList=$('#products-list');
+            productList.empty();
+            productList.append(`<div>No Book found in store written by ${valauthor}</div>`)
+        }
+        else{
+        refresh(data);}
+    })
+}
+function publisherfind() {
+    let valpublisher=publisher.val();
+
+    $.post(`/users/publisher/${valpublisher}`,(data)=>{
+        console.log(typeof data)
+        if (!data){
+            console.log("bye")
+            let productList=$('#products-list');
+            productList.empty();
+            productList.append(`<div>No Book found in store written by ${valpublisher}</div>`)
+        }
+        else{
+            refresh(data);}
+    })
+}
+function genrefind() {
+    let valgenre=genre.val();
+
+    $.post(`/users/genre/${valgenre}`,(data)=>{
+        console.log(typeof data)
+        if (!data){
+            console.log("bye")
+            let productList=$('#products-list');
+            productList.empty();
+            productList.append(`<div>No Book found in store written by ${valgenre}</div>`)
+        }
+        else{
+            refresh(data);}
+    })
+}
