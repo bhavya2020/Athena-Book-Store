@@ -4,6 +4,7 @@ function refresh(products)
     let productList=$('#products-list');
     productList.empty();
     for (let product of products) {
+        console.log(product.ISBN);
         let newProduct = $(`
              <div class="card col-3 m-2" style="width: 20rem;">
                 <div class="card-body">
@@ -39,7 +40,6 @@ function refresh(products)
                       <button type="button" class="btn btn-default"  id="submitcust" data-isbn="${product.ISBN}" onclick="add(this)">Submit</button>
                     </div>
                   </div>
-                  
                 </div>
               </div>
             </div>`
