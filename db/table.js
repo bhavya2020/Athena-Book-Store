@@ -5,7 +5,7 @@ const dbconfig={
     host:'localhost',
     database:'bookstore',
     user:'root',
-    password:'aastha08'
+    password:'bhavya'
 };
 
 exports.addBook= function insertBook(obj,cb) {
@@ -62,19 +62,16 @@ exports.buybook=function buybook(obj,cb) {
         `insert into customer values(?,?,?)`,
         [obj.email, obj.name, obj.address],
         (err) => {
-            console.log(obj.email)
             if (err) throw err;
             conn.query(
                 `insert into customer_phonenum values(?,?)`,
                 [obj.email, obj.phone],
                 (err) => {
-                    console.log("inphone");
                     if (err) throw err;
                     conn.query(
                         `insert into book_purchased values(?,?,?)`,
                         [obj.isbn, obj.email, obj.date],
                         (err) => {
-                            console.log("purchase");
                             if (err) throw err;
                             cb();
                         }

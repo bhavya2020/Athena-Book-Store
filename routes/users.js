@@ -37,7 +37,6 @@ route.post('/genre/:id',(req,res)=>{
     })
 });
 route.post('/buybooks', (req, res) => {
-    console.log('in route');
     products.buybook(req.body,()=>{
         res.redirect('http://localhost:4646/users');
     })
