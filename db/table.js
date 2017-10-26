@@ -2,10 +2,10 @@ const mysql =require('mysql2');
 const config=require('../config.json');
 
 const dbconfig={
-    host:config.DB.host,
-    database:config.DB.database,
-    user:config.DB.user,
-    password:config.DB.password
+    host:'localhost',
+    database:'bookstore',
+    user:'root',
+    password:'aastha08'
 };
 
 exports.addBook= function insertBook(obj,cb) {
@@ -62,6 +62,7 @@ exports.buybook=function buybook(obj,cb) {
         `insert into customer values(?,?,?)`,
         [obj.email, obj.name, obj.address],
         (err) => {
+            console.log(obj.email)
             if (err) throw err;
             conn.query(
                 `insert into customer_phonenum values(?,?)`,

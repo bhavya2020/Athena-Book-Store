@@ -15,34 +15,36 @@ function refresh(products)
                     <br>
                     <b>stock: </b> ${product.quantity}
                     <br><div style="float: right">Add to cart
-                     <i class="fa fa-plus-circle add" data-toggle="modal" data-target="#myModal"  style="color: navy; float: right;font-size: 4vh"></i>
+                     <i class="fa fa-plus-circle add" data-toggle="modal" data-target="#${product.ISBN}" ></i>
                      </div></p>
                 </div>
-
-              <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog">
-                
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Customer Details</h4>
-                    </div>
-                    <div class="modal-body">
-                      <input type="text" placeholder="Name" id="namecust">
-                      <input type="text" placeholder="Email" id="emailcust">
-                      <input type="number" placeholder="Phonenum" id="phonecust">
-                      <input type="text" placeholder="Address" id="addresscust">
+                  <div class="modal fade" id="${product.ISBN}" role="dialog">
+                    <div class="modal-dialog">
+                    
+                      <!-- Modal content-->
+                      <div class="modal-content" >
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Customer Details</h4>
+                        </div>
+                        <div class="modal-body">
+                          <input type="text" placeholder="Name" id="namecust">
+                          <input type="text" placeholder="Email" id="emailcust">
+                          <input type="number" placeholder="Phonenum" id="phonecust">
+                          <input type="text" placeholder="Address" id="addresscust">
+                          
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default"  id="submitcust" data-isbn="${product.ISBN}" onclick="add(this)" data-dismiss="modal">Submit</button>
+                        </div>
+                      
                       
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default"  id="submitcust" data-isbn="${product.ISBN}" onclick="add(this)">Submit</button>
                     </div>
                   </div>
-                  
                 </div>
-              </div>
-            </div>`
+              
+            `
         );
         productList.append(newProduct);
     }
@@ -116,8 +118,8 @@ $(function(){
                 phone:phone.val(),
                 address:address.val(),
                 date:today
-            },(data)=>{refresh(data)})
-            
+            },(data)=>{refresh(data);alert("you have successfully purchased the book")})
+        // $(el).setAttribute({'data-dismiss':'modal'})
 
         
 
