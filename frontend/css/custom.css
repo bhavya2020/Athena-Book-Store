@@ -4,9 +4,12 @@
 a{
     color: white;
 }
+.bgg{
+    background-image: url("../hh.jpg");
+    background-size: cover;
+}
 .bg {
-    background-color: khaki;
-    background-image: url(../images/bg2.jpg);
+    background-color: #f7ecb5;
     background-size: cover;
     position: absolute;
     top:0px;

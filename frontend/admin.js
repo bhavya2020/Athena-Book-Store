@@ -14,7 +14,11 @@ function refresh(books)
                 <b>Price: </b> ${book.price}
                 <br>
                 <b>stock: </b> ${book.quantity}
-                 <i data-isbn="${book.ISBN}" class="fa fa-trash del" onclick="del(this)" style="color: red; float: right;font-size: 4vh"></i>
+                <div style="float: right">
+                <i data-isbn="${book.ISBN}" class="fa fa-minus-circle del" onclick="minus(this)" style="color: green; font-size: 4vh"></i>
+                <i data-isbn="${book.ISBN}" class="fa fa-plus-circle del" onclick="plus(this)" style="color: blue; font-size: 4vh"></i>
+                 <i data-isbn="${book.ISBN}" class="fa fa-trash del" onclick="del(this)" style="color: red; font-size: 4vh"></i>
+                 </div>
                  </p>
             </div>
         </div>`
@@ -75,6 +79,20 @@ $(()=>{
     {
         let isbn=$(el).attr('data-isbn');
         $.post(`/admin/${isbn}`,(data) => {
+            refresh(data)
+        })
+    }
+    window.plus= function(el)
+    {
+        let isbn=$(el).attr('data-isbn');
+        $.post(`/admin/plus/${isbn}`,(data) => {
+            refresh(data)
+        })
+    }
+    window.minus= function(el)
+    {
+        let isbn=$(el).attr('data-isbn');
+        $.post(`/admin/minus/${isbn}`,(data) => {
             refresh(data)
         })
     }

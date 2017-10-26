@@ -5,7 +5,7 @@ const dbconfig={
     host:'localhost',
     database:'bookstore',
     user:'root',
-    password:'bhavya'
+    password:'aastha08'
 };
 
 exports.addBook= function insertBook(obj,cb) {
@@ -163,7 +163,26 @@ exports.findgenre=function findauthor(name,cb) {
         }
     )
 }
-
+exports.plusBook=function plusBook(isbn,cb) {
+    const conn = mysql.createConnection(dbconfig);
+    conn.query(
+    `update book set quantity=quantity+1 where ISBN=?`,[isbn],
+        (err)=>{
+        if(err) throw err;
+        cb();
+        }
+        )
+}
+exports.minusBook=function plusBook(isbn,cb) {
+    const conn = mysql.createConnection(dbconfig);
+    conn.query(
+        `update book set quantity=quantity-1 where ISBN=?`,[isbn],
+        (err)=>{
+            if(err) throw err;
+            cb();
+        }
+    )
+}
 exports.deleteBook=function deleteBook(isbn,cb) {
     const conn = mysql.createConnection(dbconfig);
     conn.query(

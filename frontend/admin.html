@@ -18,7 +18,8 @@
     <script src="admin.js" type="text/javascript"></script>
 
 </head>
-<body>
+<body class="bg">
+<br>
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -33,19 +34,19 @@
     <div class="row justify-content-center">
 
         <div class="col-4 m-1">
-            <input id="isbn" class="form-control" placeholder="isbn" type="number">
+            <input id="isbn" class="form-control" placeholder="ISBN Number*" type="number" required>
         </div>
         <div class="col-4 m-1">
-            <input id="title" class="form-control" placeholder="title">
+            <input id="title" class="form-control" placeholder="Title of the book*" required>
         </div>
         <div class="col-4 m-1">
-            <input id="genre" class="form-control" placeholder="genre">
+            <input id="genre" class="form-control" placeholder="Genre of the book" required>
         </div>
         <div class="col-4 m-1">
-            <input id="price" class="form-control" placeholder="price" type="number">
+            <input id="price" class="form-control" placeholder="Price of the book" required type="number">
         </div>
         <div class="col-4 m-1">
-            <input id="quantity" class="form-control" placeholder="quantity" type="number">
+            <input id="quantity" class="form-control" placeholder="No of books to be added*" required type="number">
         </div>
     </div>
 <br>
@@ -55,19 +56,19 @@
 <br>
     <div class="row justify-content-center">
         <div class="col-4 m-1">
-            <input id="pub_name" class="form-control" placeholder="publisher name">
+            <input id="pub_name" class="form-control" placeholder="Publisher Name*" required>
         </div>
         <div class="col-4 m-1">
-            <input id="pub_address" class="form-control" placeholder="address">
+            <input id="pub_address" class="form-control" placeholder="Address of publisher*" required>
         </div>
         <div class="col-4 m-1">
-            <input id="pub_phone" class="form-control" placeholder="phone number">
+            <input id="pub_phone" class="form-control" placeholder="Phone number of publisher*" required type="number">
         </div>
         <div class="col-4 m-1">
-            <input id="country" class="form-control" placeholder="country">
+            <input id="country" class="form-control" placeholder="Country of publishing of book*" required>
         </div>
         <div class="col-4 m-1">
-            <input id="date" class="form-control" placeholder="publishing date" type="date">
+            <input id="date" class="form-control" placeholder="Publishing date*" type="date" required>
         </div>
     </div>
 <br>
@@ -77,23 +78,27 @@
 <br>
 <div class="row justify-content-center">
     <div class="col-4 m-1">
-        <input id="auth_name" class="form-control" placeholder="author name">
+        <input id="auth_name" class="form-control" placeholder="Author name*" required>
     </div>
     <div class="col-4 m-1">
-        <input id="auth_address" class="form-control" placeholder="address">
+        <input id="auth_address" class="form-control" placeholder="Address of author*" required>
     </div>
     <div class="col-4 m-1">
-        <input id="noBooks" class="form-control" placeholder="no of books">
+        <input id="noBooks" class="form-control" placeholder="No of bestselling books by the author*" required>
     </div>
 </div>
 <br>
+
 <div class="row justify-content-center mt-3">
 <div class="col-3">
     <button class="btn btn-primary" id="add">ADD A NEW BOOK<i class="fa fa-plus"></i> </button>
 </div>
 </div>
  <br>
+<hr>
+<div class="text-center dark_orange twnty_four">Books in store</div>
 <div class="row justify-content-center mt-3" id="books">
+
         <div class="card col-3" style="width: 20rem;">
             <div class="card-body">
                 <h4 class="card-title">Card title</h4>

@@ -25,4 +25,18 @@ route.post('/:id', (req, res) => {
     })
 
 });
+route.post('/plus/:id', (req, res) => {
+
+    book.plusBook(req.params.id,()=>{
+        res.redirect('http://localhost:4646/admin');
+    })
+
+});
+route.post('/minus/:id', (req, res) => {
+
+    book.minusBook(req.params.id,()=>{
+        res.redirect('http://localhost:4646/admin');
+    })
+
+});
 exports.route = route;
