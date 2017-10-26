@@ -66,11 +66,13 @@ exports.buybook=function buybook(obj,cb) {
                 `insert into customer_phonenum values(?,?)`,
                 [obj.email,obj.phone],
                 (err)=>{
+                    console.log("inphone");
                     if(err) throw err;
                     conn.query(
                         `insert into book_purchased values(?,?,?)`,
                         [obj.isbn,obj.email,obj.date],
                         (err)=>{
+                            console.log("purchase");
                             if(err) throw err;
                             cb();
                     }

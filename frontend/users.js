@@ -109,7 +109,6 @@ $(function(){
         var phone=$('#phonecust');
         var address=$('#addresscust');
         var submitcust=$('#submitcust');
-        submitcust.click(function () {
             $.post('http://localhost:4646/users/buybooks',{
                 isbn:isb,
                 name:name.val(),
@@ -119,7 +118,7 @@ $(function(){
                 date:today
             },(data)=>{refresh(data)})
             
-        })
+
         
 
     }
