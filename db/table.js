@@ -222,15 +222,10 @@ exports.deleteBook=function deleteBook(isbn,cb) {
                         (err)=>{
                             if (err)throw  err;
                             conn.query(
-                                `delete from popularity where quantity in ( select quantity from book where ISBN=?); `,
+                                `delete from popularity where ISBN=?; `,
                                 [isbn],
                                 (err)=>{
                                     if(err) throw err;
-                                    conn.query(
-                                        `delete from book where ISBN=?;`,
-                                        [isbn],
-                                        (err)=>{
-                                            if(err) throw err;
                                             cb();
 
                                         }
@@ -241,8 +236,7 @@ exports.deleteBook=function deleteBook(isbn,cb) {
                     )
                 }
             )
-        }
-    )
-};
+        };
+
 
 
