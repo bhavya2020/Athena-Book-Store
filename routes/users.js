@@ -25,17 +25,23 @@ route.post('/author/:id',(req,res)=>{
     products.findauthor(req.params.id,(books)=>{
         res.send(books);
     })
-})
+});
 route.post('/publisher/:id',(req,res)=>{
     products.findpublisher(req.params.id,(books)=>{
         res.send(books);
     })
-})
+});
 route.post('/genre/:id',(req,res)=>{
     products.findgenre(req.params.id,(books)=>{
         res.send(books);
     })
-})
+});
+route.post('/buybooks', (req, res) => {
+    console.log('in route');
+    products.buybook(req.body,()=>{
+        res.redirect('http://localhost:4646/users');
+    })
+});
 
 /*route.post('/:id', (req, res) => {
     console.log(products);
