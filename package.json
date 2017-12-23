@@ -1,16 +1,28 @@
 {
-  "name": "dbmsproject",
+  "name": "dbms",
   "version": "1.0.0",
-  "main": "server.js",
+  "description": "",
+  "main": "passport.js",
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "express-session": "^1.15.6",
+    "hbs": "^4.0.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhavya2020/dbmsProject.git"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.16.2",
-    "mysql2": "^1.4.2"
+  "bugs": {
+    "url": "https://github.com/bhavya2020/dbmsProject/issues"
   },
-  "description": ""
+  "homepage": "https://github.com/bhavya2020/dbmsProject#readme"
 }

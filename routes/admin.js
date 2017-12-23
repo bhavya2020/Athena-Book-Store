@@ -1,5 +1,5 @@
 const route=require('express').Router();
-const book = require('../db/table');
+const book = require('../table.js');
 
 route.get('/', (req, res) => {
     book.showBooks((books) => {

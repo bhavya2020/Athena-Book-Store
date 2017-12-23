@@ -1,8 +1,14 @@
 const route=require('express').Router();
-const products = require('../db/table');
+const products = require('../table');
 
 route.get('/', (req, res) => {
     products.showBook((books) => {
+        res.send(books);
+    })
+});
+route.get('/findnames', (req, res) => {
+    products.findnames((books) => {
+
         res.send(books);
     })
 });

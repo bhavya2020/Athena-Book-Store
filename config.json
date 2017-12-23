@@ -1,8 +1,0 @@
-{
-  "DB":{
-  "host": "localhost",
-  "database": "bookstore",
-  "user": "root",
-  "password": "bhavya"
-}
-}
